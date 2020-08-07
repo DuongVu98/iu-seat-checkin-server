@@ -1,4 +1,4 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Get } from "@nestjs/common";
 import { SeatDto } from "../dto/app.dto";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 
@@ -7,7 +7,8 @@ export class ViewerController {
 
     constructor(private getAllSeatsService: GetAllSeatsService){}
 
-    async getAllSeats(): Promise<SeatDto[]>{
+    @Get("all-seats")
+    getAllSeats(): Promise<SeatDto[]>{
         return this.getAllSeatsService.execute();
     }
 }

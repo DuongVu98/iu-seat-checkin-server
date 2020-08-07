@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { SeatModel } from "../models/seat.model";
@@ -14,6 +14,11 @@ export class SeatRepository {
     }
 
     async findAll(): Promise<SeatModel[]> {
-        return this.seatModel.find().exec();
+        this.seatModel.find().then(
+            debug => {
+                Logger.log(debug);
+            }
+        );
+        return this.seatModel.find();
     }
 }

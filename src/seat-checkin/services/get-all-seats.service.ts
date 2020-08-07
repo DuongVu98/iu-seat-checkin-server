@@ -4,14 +4,13 @@ import { SeatDto } from "../dto/app.dto";
 
 @Injectable()
 export class GetAllSeatsService {
-    seatDtoList: SeatDto[] = [];
-
     constructor(private seatRepository: SeatRepository) {}
 
     async execute(): Promise<SeatDto[]> {
+        const seatsList: SeatDto[] = [];
         await this.seatRepository.findAll().then(seatModels => {
             seatModels.forEach(seatModel => {
-                this.seatDtoList.push(
+                seatsList.push(
                     new SeatDto()
                         .setDelegateCode(seatModel.delegateCode)
                         .setId(seatModel._id)
@@ -19,6 +18,6 @@ export class GetAllSeatsService {
             });
         });
 
-        return this.seatDtoList;
+        return seatsList;
     }
 }
