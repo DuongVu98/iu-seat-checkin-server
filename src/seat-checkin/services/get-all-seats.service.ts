@@ -14,6 +14,8 @@ export class GetAllSeatsService {
                     new SeatDto()
                         .setDelegateCode(seatModel.delegateCode)
                         .setId(seatModel._id)
+                        .setRow(seatModel.row)
+                        .setColumn(seatModel.column)
                 );
             });
         });
