@@ -23,4 +23,8 @@ export class SeatRepository {
     async updateSeat(id: string, seatDto: SeatDto): Promise<SeatModel> {
         return this.seatModel.findByIdAndUpdate(id, seatDto, { new: true });
     }
+
+    async deleteSeat(id: string): Promise<any> {
+        return await this.seatModel.findByIdAndRemove(id);
+    }
 }

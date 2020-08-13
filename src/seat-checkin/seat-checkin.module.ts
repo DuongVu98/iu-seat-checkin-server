@@ -7,6 +7,7 @@ import { AdminController } from "./api/admin.controller";
 import { ViewerController } from "./api/viewer.controller";
 import { GetAllSeatsService } from "./services/get-all-seats.service";
 import { UpdateSeatService } from "./services/update-seat.service";
+import { DeleteSeatCodeService } from "./services/delete-seat.service";
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { UpdateSeatService } from "./services/update-seat.service";
         AddSeatService,
         GetAllSeatsService,
         UpdateSeatService,
+        DeleteSeatCodeService
     ],
 })
 export class SeatCheckinModule {}
