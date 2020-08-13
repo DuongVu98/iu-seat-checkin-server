@@ -12,10 +12,10 @@ export class GetAllSeatsService {
             seatModels.forEach(seatModel => {
                 seatsList.push(
                     new SeatDto()
-                        .setDelegateCode(seatModel.delegateCode)
-                        .setId(seatModel._id)
-                        .setRow(seatModel.row)
-                        .setColumn(seatModel.column)
+                        .thisSetelegateCode(seatModel.delegateCode)
+                        .thisSetId(seatModel._id)
+                        .thisSetRow(seatModel.row)
+                        .thisSetColumn(seatModel.column)
                 );
             });
         });

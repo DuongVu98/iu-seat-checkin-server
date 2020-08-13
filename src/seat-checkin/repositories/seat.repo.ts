@@ -6,7 +6,7 @@ import { SeatDto } from "../dto/app.dto";
 
 @Injectable()
 export class SeatRepository {
-    constructor(@InjectModel("seats") private seatModel: Model<SeatModel>){}
+    constructor(@InjectModel("seats") private seatModel: Model<SeatModel>) {}
 
     async createSeat(seat: SeatDto): Promise<SeatModel> {
         const newSeat = new this.seatModel(seat);
@@ -14,11 +14,13 @@ export class SeatRepository {
     }
 
     async findAll(): Promise<SeatModel[]> {
-        this.seatModel.find().then(
-            debug => {
-                Logger.log(debug);
-            }
-        );
+        this.seatModel.find().then(debug => {
+            Logger.log(debug);
+        });
         return this.seatModel.find();
+    }
+
+    async updateSeat(id: string, seatDto: SeatDto): Promise<SeatModel> {
+        return this.seatModel.findByIdAndUpdate(id, seatDto, { new: true });
     }
 }

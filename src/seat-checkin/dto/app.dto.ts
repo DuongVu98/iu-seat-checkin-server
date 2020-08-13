@@ -5,20 +5,20 @@ export class SeatDto {
     row: number;
     column: number;
 
-    setId(id: string): SeatDto{
+    thisSetId(id: string): SeatDto{
         this.id = id;
         return this;
     }
 
-    setDelegateCode(code: string): SeatDto {
+    thisSetelegateCode(code: string): SeatDto {
         this.delegateCode = code;
         return this;
     }
-    setRow(row: number): SeatDto {
+    thisSetRow(row: number): SeatDto {
         this.row = row;
         return this;
     }
-    setColumn(column: number): SeatDto {
+    thisSetColumn(column: number): SeatDto {
         this.column = column;
         return this;
     }
