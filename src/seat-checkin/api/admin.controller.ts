@@ -4,6 +4,7 @@ import { AddSeatService } from "../services/add-seat.service";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { UpdateSeatService } from "../services/update-seat.service";
 import { DeleteSeatCodeService } from "../services/delete-seat.service";
+import { SetOccupiedService } from "../services/set-occupied.service";
 
 @Controller("admin")
 export class AdminController {
@@ -11,7 +12,8 @@ export class AdminController {
         private addSeatService: AddSeatService,
         private getAllSeatsService: GetAllSeatsService,
         private updateSeatService: UpdateSeatService,
-        private deleteSeatService: DeleteSeatCodeService
+        private deleteSeatService: DeleteSeatCodeService,
+        private setOccupiedService: SetOccupiedService
     ) {}
 
     @Post("add-seat")
@@ -32,5 +34,10 @@ export class AdminController {
     @Get("delete-seat/:seatId")
     async deleteSeatCode(@Param("seatId") seatId: string): Promise<void> {
         return this.deleteSeatService.execute(seatId);
+    }
+
+    @Post("set-occupied")
+    async setSeatOccupied(@Body() data: { id: string; occupied: boolean }): Promise<void> {
+        return this.setOccupiedService.execute(data.id, data.occupied);
     }
 }

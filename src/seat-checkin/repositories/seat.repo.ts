@@ -14,10 +14,11 @@ export class SeatRepository {
     }
 
     async findAll(): Promise<SeatModel[]> {
-        this.seatModel.find().then(debug => {
-            Logger.log(debug);
-        });
         return this.seatModel.find();
+    }
+
+    async findById(id: string): Promise<SeatModel> {
+        return this.seatModel.findById(id);
     }
 
     async updateSeat(id: string, seatDto: SeatDto): Promise<SeatModel> {

@@ -8,6 +8,7 @@ import { ViewerController } from "./api/viewer.controller";
 import { GetAllSeatsService } from "./services/get-all-seats.service";
 import { UpdateSeatService } from "./services/update-seat.service";
 import { DeleteSeatCodeService } from "./services/delete-seat.service";
+import { SetOccupiedService } from "./services/set-occupied.service";
 
 @Module({
     imports: [
@@ -19,7 +20,8 @@ import { DeleteSeatCodeService } from "./services/delete-seat.service";
         AddSeatService,
         GetAllSeatsService,
         UpdateSeatService,
-        DeleteSeatCodeService
+        DeleteSeatCodeService,
+        SetOccupiedService,
     ],
 })
 export class SeatCheckinModule {}
