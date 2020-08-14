@@ -4,6 +4,7 @@ export class SeatDto {
     delegateCode: string;
     row: number;
     column: number;
+    occupied: boolean;
 
     thisSetId(id: string): SeatDto{
         this.id = id;
@@ -20,6 +21,10 @@ export class SeatDto {
     }
     thisSetColumn(column: number): SeatDto {
         this.column = column;
+        return this;
+    }
+    thisSetOccupied(occupied: boolean): SeatDto {
+        this.occupied = occupied;
         return this;
     }
 }

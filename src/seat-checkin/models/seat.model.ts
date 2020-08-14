@@ -12,6 +12,9 @@ export class SeatModel extends Document {
     @Prop()
     column: number;
 
+    @Prop()
+    occupied: boolean;
+
     setDelegateCode(code: string): SeatModel {
         this.delegateCode = code;
         return this;
@@ -22,6 +25,10 @@ export class SeatModel extends Document {
     }
     setColumn(column: number): SeatModel {
         this.column = column;
+        return this;
+    }
+    setOccupied(occupied: boolean): SeatModel {
+        this.occupied = occupied;
         return this;
     }
 }

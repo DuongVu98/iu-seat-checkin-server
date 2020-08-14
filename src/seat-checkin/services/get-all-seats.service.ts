@@ -16,6 +16,7 @@ export class GetAllSeatsService {
                         .thisSetId(seatModel._id)
                         .thisSetRow(seatModel.row)
                         .thisSetColumn(seatModel.column)
+                        .thisSetOccupied(seatModel.occupied)
                 );
             });
         });
