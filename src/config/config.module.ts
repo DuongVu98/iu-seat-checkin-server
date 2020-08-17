@@ -1,11 +1,15 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { ConfigController } from "./config.controller";
 
 const config = {
-    envFilePath: "../../env/.development.env"
+    envFilePath: `src/env/.${process.env.NODE_ENV}.env`
 }
 
 @Module({
+    controllers: [ConfigController],
     imports: [ConfigModule.forRoot(config)],
+    providers: [ConfigService],
+    exports: [ConfigService]
 })
 export class AppConfig {}
