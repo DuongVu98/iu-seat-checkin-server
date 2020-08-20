@@ -1,5 +1,3 @@
-ARG ENV=development
-
 FROM node:12-alpine3.9
 
 WORKDIR /usr/src/app

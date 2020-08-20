@@ -1,5 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
+import { Logger } from "@nestjs/common";
 
 const corsOptions = {
     origin: "*",
@@ -11,6 +12,7 @@ const corsOptions = {
 
 async function bootstrap() {
 
+    Logger.log(`log db host --> ${process.env.DB_HOST}`)
     const app = await NestFactory.create(AppModule);
     app.enableCors(corsOptions);
     
