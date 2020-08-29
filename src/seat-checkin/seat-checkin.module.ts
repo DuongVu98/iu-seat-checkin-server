@@ -9,6 +9,8 @@ import { GetAllSeatsService } from "./services/get-all-seats.service";
 import { UpdateSeatService } from "./services/update-seat.service";
 import { DeleteSeatCodeService } from "./services/delete-seat.service";
 import { SetOccupiedService } from "./services/set-occupied.service";
+import { WsGateway } from "./gateways/ws.gateway";
+import { SeatOccupiedGateway } from "./gateways/seat-occupied.gateway";
 
 @Module({
     imports: [
@@ -22,6 +24,8 @@ import { SetOccupiedService } from "./services/set-occupied.service";
         UpdateSeatService,
         DeleteSeatCodeService,
         SetOccupiedService,
+        WsGateway,
+        SeatOccupiedGateway
     ],
 })
 export class SeatCheckinModule {}
