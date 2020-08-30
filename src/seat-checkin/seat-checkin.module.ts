@@ -11,6 +11,7 @@ import { DeleteSeatCodeService } from "./services/delete-seat.service";
 import { SetOccupiedService } from "./services/set-occupied.service";
 import { WsGateway } from "./gateways/ws.gateway";
 import { SeatOccupiedGateway } from "./gateways/seat-occupied.gateway";
+import { GetNumerialInfoService } from "./services/get-numerial-info.service";
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { SeatOccupiedGateway } from "./gateways/seat-occupied.gateway";
         UpdateSeatService,
         DeleteSeatCodeService,
         SetOccupiedService,
+        GetNumerialInfoService,
         WsGateway,
         SeatOccupiedGateway
     ],

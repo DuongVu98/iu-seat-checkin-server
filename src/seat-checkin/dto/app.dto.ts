@@ -1,12 +1,11 @@
 export class SeatDto {
-
     id: string;
     delegateCode: string;
     row: number;
     column: number;
     occupied: boolean;
 
-    thisSetId(id: string): SeatDto{
+    thisSetId(id: string): SeatDto {
         this.id = id;
         return this;
     }
@@ -25,6 +24,21 @@ export class SeatDto {
     }
     thisSetOccupied(occupied: boolean): SeatDto {
         this.occupied = occupied;
+        return this;
+    }
+}
+
+export class NumerialInfoDto {
+    delegatesAmount: number;
+    occupiedAmount: number;
+
+    thisSetDelegatesAmount(amount: number): NumerialInfoDto {
+        this.delegatesAmount = amount;
+        return this;
+    }
+
+    thisSetOccupiedAmount(amount: number): NumerialInfoDto {
+        this.occupiedAmount = amount;
         return this;
     }
 }

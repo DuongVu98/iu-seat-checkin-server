@@ -6,6 +6,8 @@ import { SeatDto } from "../dto/app.dto";
 
 @Injectable()
 export class SeatRepository {
+    private logger: Logger = new Logger("SeatRepository");
+
     constructor(@InjectModel("seats") private seatModel: Model<SeatModel>) {}
 
     async createSeat(seat: SeatDto): Promise<SeatModel> {
@@ -15,6 +17,10 @@ export class SeatRepository {
 
     async findAll(): Promise<SeatModel[]> {
         return this.seatModel.find();
+    }
+
+    async coutAll(): Promise<number> {
+        return this.seatModel.countDocuments();
     }
 
     async findById(id: string): Promise<SeatModel> {
@@ -27,5 +33,9 @@ export class SeatRepository {
 
     async deleteSeat(id: string): Promise<any> {
         return await this.seatModel.findByIdAndRemove(id);
+    }
+
+    async countAllOccupiedSeat(): Promise<number> {
+        return this.seatModel.countDocuments({ occupied: true });
     }
 }
