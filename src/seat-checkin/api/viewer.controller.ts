@@ -1,13 +1,15 @@
-import { Controller, Get } from "@nestjs/common";
-import { SeatDto, NumerialInfoDto } from "../dto/app.dto";
+import { Controller, Get, Post, Body } from "@nestjs/common";
+import { SeatDto, NumerialInfoDto, LoginForm } from "../dto/app.dto";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { GetNumerialInfoService } from "../services/get-numerial-info.service";
+import { LoginService } from "../services/login.service";
 
 @Controller("viewer")
 export class ViewerController {
     constructor(
         private getAllSeatsService: GetAllSeatsService,
-        private getNumerialInfoService: GetNumerialInfoService
+        private getNumerialInfoService: GetNumerialInfoService,
+        private loginService: LoginService
     ) {}
 
     @Get("all-seats")
@@ -18,5 +20,10 @@ export class ViewerController {
     @Get("numerial-info")
     async getNumberOfDelegates(): Promise<NumerialInfoDto> {
         return this.getNumerialInfoService.execute();
+    }
+
+    @Post("login")
+    async login(@Body() loginData: LoginForm):Promise<boolean>{
+        return this.loginService.execute(loginData);
     }
 }

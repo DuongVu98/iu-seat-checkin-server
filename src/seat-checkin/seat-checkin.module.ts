@@ -12,11 +12,11 @@ import { SetOccupiedService } from "./services/set-occupied.service";
 import { WsGateway } from "./gateways/ws.gateway";
 import { SeatOccupiedGateway } from "./gateways/seat-occupied.gateway";
 import { GetNumerialInfoService } from "./services/get-numerial-info.service";
+import { LoginService } from "./services/login.service";
+import { AppConfig } from "../config/config.module";
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: "seats", schema: SeatSchema }]),
-    ],
+    imports: [MongooseModule.forFeature([{ name: "seats", schema: SeatSchema }]), AppConfig],
     controllers: [AdminController, ViewerController],
     providers: [
         SeatRepository,
@@ -26,8 +26,9 @@ import { GetNumerialInfoService } from "./services/get-numerial-info.service";
         DeleteSeatCodeService,
         SetOccupiedService,
         GetNumerialInfoService,
+        LoginService,
         WsGateway,
-        SeatOccupiedGateway
+        SeatOccupiedGateway,
     ],
 })
 export class SeatCheckinModule {}

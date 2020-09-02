@@ -42,3 +42,7 @@ export class NumerialInfoDto {
         return this;
     }
 }
+export class LoginForm {
+    username: string;
+    password: string;
+}
