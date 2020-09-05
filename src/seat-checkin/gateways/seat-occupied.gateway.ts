@@ -26,4 +26,9 @@ export class SeatOccupiedGateway implements OnGatewayInit {
         this.logger.log(payload);
         this.websocketServer.emit("toggleSeatOccupied", payload);
     }
+
+    @SubscribeMessage("fetchApi")
+    handleReloadMessage(): void {
+        this.websocketServer.emit("fetchApi");
+    }
 }
