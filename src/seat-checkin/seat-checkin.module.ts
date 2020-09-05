@@ -14,18 +14,29 @@ import { SeatOccupiedGateway } from "./gateways/seat-occupied.gateway";
 import { GetNumerialInfoService } from "./services/get-numerial-info.service";
 import { LoginService } from "./services/login.service";
 import { AppConfig } from "../config/config.module";
+import { UserAccountSchema } from "./models/user-account.model";
+import { CreateAccountService } from "./services/create-account.service";
+import { UserAccountRepository } from "./repositories/user-account.repo";
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: "seats", schema: SeatSchema }]), AppConfig],
+    imports: [
+        MongooseModule.forFeature([
+            { name: "seats", schema: SeatSchema },
+            { name: "user_accounts", schema: UserAccountSchema },
+        ]),
+        AppConfig,
+    ],
     controllers: [AdminController, ViewerController],
     providers: [
         SeatRepository,
+        UserAccountRepository,
         AddSeatService,
         GetAllSeatsService,
         UpdateSeatService,
         DeleteSeatCodeService,
         SetOccupiedService,
         GetNumerialInfoService,
+        CreateAccountService,
         LoginService,
         WsGateway,
         SeatOccupiedGateway,

@@ -42,7 +42,35 @@ export class NumerialInfoDto {
         return this;
     }
 }
+export class UserAccountDto {
+    id: string;
+    username: string;
+    password: string;
+    salt: string;
+
+    thisSetId(id: string) {
+        this.id = id;
+        return this;
+    }
+    thisSetUsername(username: string): UserAccountDto {
+        this.username = username;
+        return this;
+    }
+    thisSetPassword(password: string): UserAccountDto {
+        this.password = password;
+        return this;
+    }
+    thisSetSalt(salt: string): UserAccountDto {
+        this.salt = salt;
+        return this;
+    }
+}
 export class LoginForm {
+    username: string;
+    password: string;
+}
+
+export class CreateAccountForm {
     username: string;
     password: string;
 }

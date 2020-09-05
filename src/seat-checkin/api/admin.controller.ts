@@ -1,10 +1,11 @@
 import { Controller, Post, Body, Get, Param, Logger } from "@nestjs/common";
-import { SeatDto } from "../dto/app.dto";
+import { SeatDto, CreateAccountForm } from "../dto/app.dto";
 import { AddSeatService } from "../services/add-seat.service";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { UpdateSeatService } from "../services/update-seat.service";
 import { DeleteSeatCodeService } from "../services/delete-seat.service";
 import { SetOccupiedService } from "../services/set-occupied.service";
+import { CreateAccountService } from "../services/create-account.service";
 
 @Controller("admin")
 export class AdminController {
@@ -13,7 +14,8 @@ export class AdminController {
         private getAllSeatsService: GetAllSeatsService,
         private updateSeatService: UpdateSeatService,
         private deleteSeatService: DeleteSeatCodeService,
-        private setOccupiedService: SetOccupiedService
+        private setOccupiedService: SetOccupiedService,
+        private createAccountService: CreateAccountService
     ) {}
 
     @Post("add-seat")
@@ -39,5 +41,10 @@ export class AdminController {
     @Post("set-occupied")
     async setSeatOccupied(@Body() data: { id: string; occupied: boolean }): Promise<void> {
         return this.setOccupiedService.execute(data.id, data.occupied);
+    }
+
+    @Post("new-account")
+    async createNewAccount(@Body() data: CreateAccountForm): Promise<void> {
+        return this.createAccountService.execute(data);
     }
 }
