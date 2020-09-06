@@ -17,6 +17,10 @@ export class UserAccountRepository {
         return this.userAccoutModel.findById(id);
     }
 
+    async findByUsername(username: string): Promise<UserAccountModel> {
+        return this.userAccoutModel.findOne({ username: username });
+    }
+
     async updateAccount(id: string, newAccountDto: UserAccountDto): Promise<UserAccountModel> {
         return this.userAccoutModel.findByIdAndUpdate(id, newAccountDto, { new: true });
     }
