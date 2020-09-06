@@ -11,6 +11,7 @@ import { ConfigService } from "@nestjs/config";
 
 @Controller("admin")
 export class AdminController {
+    logger: Logger = new Logger("AdminController");
     constructor(
         private addSeatService: AddSeatService,
         private getAllSeatsService: GetAllSeatsService,
@@ -54,8 +55,9 @@ export class AdminController {
         }
     }
 
-    @Post("change-password")
+    @Post("change-password/:key")
     async changePassword(@Body() data: ChangePasswordForm, @Param() params: { key: string }): Promise<void> {
+        this.logger.log(`keyInput: ${params.key} - keyFromEnv: ${this.configService.get<string>("ADMIN_KEY")}`);
         if (params.key === this.configService.get<string>("ADMIN_KEY")) {
             return this.changePasswordService.execute(data.accountId, data.newPassword);
         }

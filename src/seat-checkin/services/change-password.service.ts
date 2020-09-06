@@ -27,7 +27,7 @@ export class ChangePasswordService {
                     .thisSetPassword(newhashedPassword)
                     .thisSetSalt(salt);
 
-                this.userAccountRepository.createAccount(newUserAccountDto);
+                this.userAccountRepository.updateAccount(newUserAccountDto.id, newUserAccountDto);
             }
         });
     }
