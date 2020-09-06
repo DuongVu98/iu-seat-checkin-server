@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body } from "@nestjs/common";
-import { SeatDto, NumerialInfoDto, LoginForm } from "../dto/app.dto";
+import { SeatDto, NumerialInfoDto, LoginForm, LoginResponse } from "../dto/app.dto";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { GetNumerialInfoService } from "../services/get-numerial-info.service";
 import { LoginService } from "../services/login.service";
@@ -23,7 +23,7 @@ export class ViewerController {
     }
 
     @Post("login")
-    async login(@Body() loginData: LoginForm):Promise<boolean>{
+    async login(@Body() loginData: LoginForm):Promise<LoginResponse>{
         return this.loginService.execute(loginData);
     }
 }

@@ -17,6 +17,8 @@ import { AppConfig } from "../config/config.module";
 import { UserAccountSchema } from "./models/user-account.model";
 import { CreateAccountService } from "./services/create-account.service";
 import { UserAccountRepository } from "./repositories/user-account.repo";
+import { PasswordEncryptionHelper } from "./helpers/pasword-encryption.helper";
+import { ChangePasswordService } from "./services/change-password.service";
 
 @Module({
     imports: [
@@ -37,9 +39,11 @@ import { UserAccountRepository } from "./repositories/user-account.repo";
         SetOccupiedService,
         GetNumerialInfoService,
         CreateAccountService,
+        ChangePasswordService,
         LoginService,
         WsGateway,
         SeatOccupiedGateway,
+        PasswordEncryptionHelper,
     ],
 })
 export class SeatCheckinModule {}

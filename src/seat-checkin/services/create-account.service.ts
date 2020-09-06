@@ -1,45 +1,31 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { UserAccountRepository } from "../repositories/user-account.repo";
 import { UserAccountDto, CreateAccountForm } from "../dto/app.dto";
-import Crypto = require("crypto-js");
+import { PasswordEncryptionHelper } from "../helpers/pasword-encryption.helper";
 
 @Injectable()
 export class CreateAccountService {
-    private saltLength = 6;
-
     private logger: Logger = new Logger("CreateAccountService");
 
-    constructor(private userAccountRepository: UserAccountRepository) {}
+    constructor(
+        private passwordEncryptionHelper: PasswordEncryptionHelper,
+        private userAccountRepository: UserAccountRepository
+    ) {}
 
     async execute(newUserAccountForm: CreateAccountForm): Promise<void> {
-        const salt = await this.getRandomSalt();
-        const pepper = await this.getRandomPepper();
-
-        const passwordToHashing = await newUserAccountForm.password.concat(salt).concat(pepper);
-        const hashCode = await this.getHashingCode(passwordToHashing);
+        const salt = await this.passwordEncryptionHelper.getRandomSalt();
+        const pepper = await this.passwordEncryptionHelper.getRandomPepper();
+        const newPassword = await this.passwordEncryptionHelper.getHashshingCode(
+            newUserAccountForm.password,
+            salt,
+            pepper
+        );
 
         const newUserAccountDto = await new UserAccountDto()
             .thisSetUsername(newUserAccountForm.username)
-            .thisSetPassword(hashCode)
+            .thisSetPassword(newPassword)
             .thisSetSalt(salt);
 
         this.userAccountRepository.createAccount(newUserAccountDto);
-    }
-
-    getRandomSalt(): string {
-        return Math.random()
-            .toString(36)
-            .substring(this.saltLength + 1);
-    }
-
-    getHashingCode(origin: string): string {
-        return Crypto.SHA256(origin).toString();
-    }
-
-    getRandomPepper(): string {
-        const fullBoard = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-
-        const randomNumber = Math.floor(Math.random() * Math.floor(fullBoard.length));
-        return fullBoard.charAt(randomNumber);
     }
 }

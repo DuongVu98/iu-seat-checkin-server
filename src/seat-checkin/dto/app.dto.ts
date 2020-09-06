@@ -48,7 +48,7 @@ export class UserAccountDto {
     password: string;
     salt: string;
 
-    thisSetId(id: string) {
+    thisSetId(id: string): UserAccountDto {
         this.id = id;
         return this;
     }
@@ -65,12 +65,21 @@ export class UserAccountDto {
         return this;
     }
 }
-export class LoginForm {
+export interface LoginForm {
     username: string;
     password: string;
 }
 
-export class CreateAccountForm {
+export interface CreateAccountForm {
     username: string;
     password: string;
+}
+export interface ChangePasswordForm {
+    accountId: string;
+    newPassword: string;
+}
+
+export interface LoginResponse {
+    account?: UserAccountDto;
+    isValidInput?: boolean;
 }

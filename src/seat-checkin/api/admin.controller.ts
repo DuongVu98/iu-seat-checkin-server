@@ -1,11 +1,13 @@
 import { Controller, Post, Body, Get, Param, Logger } from "@nestjs/common";
-import { SeatDto, CreateAccountForm } from "../dto/app.dto";
+import { SeatDto, CreateAccountForm, ChangePasswordForm } from "../dto/app.dto";
 import { AddSeatService } from "../services/add-seat.service";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { UpdateSeatService } from "../services/update-seat.service";
 import { DeleteSeatCodeService } from "../services/delete-seat.service";
 import { SetOccupiedService } from "../services/set-occupied.service";
 import { CreateAccountService } from "../services/create-account.service";
+import { ChangePasswordService } from "../services/change-password.service";
+import { ConfigService } from "@nestjs/config";
 
 @Controller("admin")
 export class AdminController {
@@ -15,7 +17,9 @@ export class AdminController {
         private updateSeatService: UpdateSeatService,
         private deleteSeatService: DeleteSeatCodeService,
         private setOccupiedService: SetOccupiedService,
-        private createAccountService: CreateAccountService
+        private createAccountService: CreateAccountService,
+        private changePasswordService: ChangePasswordService,
+        private configService: ConfigService
     ) {}
 
     @Post("add-seat")
@@ -44,7 +48,16 @@ export class AdminController {
     }
 
     @Post("new-account")
-    async createNewAccount(@Body() data: CreateAccountForm): Promise<void> {
-        return this.createAccountService.execute(data);
+    async createNewAccount(@Body() data: CreateAccountForm, @Param() params: { key: string }): Promise<void> {
+        if (params.key === this.configService.get<string>("ADMIN_KEY")) {
+            return this.createAccountService.execute(data);
+        }
+    }
+
+    @Post("change-password")
+    async changePassword(@Body() data: ChangePasswordForm, @Param() params: { key: string }): Promise<void> {
+        if (params.key === this.configService.get<string>("ADMIN_KEY")) {
+            return this.changePasswordService.execute(data.accountId, data.newPassword);
+        }
     }
 }
