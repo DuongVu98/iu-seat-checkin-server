@@ -10,8 +10,7 @@ export class AdminAuthGuard implements CanActivate {
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
-        this.logger.log(request.headers)
-        if (request.headers.user) {
+        if (request.headers.user != null || request.headers.user != undefined) {
             return this.userAccountRepository.findById(request.headers.user).then(account => {
                 this.logger.log(JSON.stringify(account))
                 if (account) {
