@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Param, Logger, UseGuards } from "@nestjs/common";
-import { SeatDto, CreateAccountForm } from "../dto/app.dto";
+import { SeatDto } from "../dto/app.dto";
 import { AddSeatService } from "../services/add-seat.service";
 import { GetAllSeatsService } from "../services/get-all-seats.service";
 import { UpdateSeatService } from "../services/update-seat.service";
