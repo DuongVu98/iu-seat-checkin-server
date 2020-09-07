@@ -19,6 +19,7 @@ import { CreateAccountService } from "./services/create-account.service";
 import { UserAccountRepository } from "./repositories/user-account.repo";
 import { PasswordEncryptionHelper } from "./helpers/pasword-encryption.helper";
 import { ChangePasswordService } from "./services/change-password.service";
+import { SecureController } from "./api/secure.controller";
 
 @Module({
     imports: [
@@ -28,7 +29,7 @@ import { ChangePasswordService } from "./services/change-password.service";
         ]),
         AppConfig,
     ],
-    controllers: [AdminController, ViewerController],
+    controllers: [AdminController, ViewerController, SecureController],
     providers: [
         SeatRepository,
         UserAccountRepository,
