@@ -27,6 +27,6 @@ export class GetNumerialInfoService {
         });
         return new NumerialInfoDto()
             .thisSetDelegatesAmount(availableDelegatesAmout + delegatesAmount - guestsAmount)
-            .thisSetOccupiedAmount(occupiedAmount - occupiedGuestsAmount);
+            .thisSetOccupiedAmount(availableDelegatesAmout + occupiedAmount - occupiedGuestsAmount);
     }
 }
