@@ -7,7 +7,7 @@ export class SetOccupiedService {
     constructor(private seatRepository: SeatRepository) {}
 
     async execute(id: string, occupied: boolean): Promise<void> {
-        this.seatRepository.findById(id).then(async seatModel => {
+        await this.seatRepository.findById(id).then(async seatModel => {
             const seatDto = await new SeatDto()
                 .thisSetId(seatModel.id)
                 .thisSetelegateCode(seatModel.delegateCode)
