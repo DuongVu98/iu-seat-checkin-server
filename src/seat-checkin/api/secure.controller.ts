@@ -1,4 +1,4 @@
-import { Controller, Logger, Post, Body, UseGuards } from "@nestjs/common";
+import { Controller, Logger, Post, Body, UseGuards, Get } from "@nestjs/common";
 import { ChangePasswordForm, CreateAccountForm } from "../dto/app.dto";
 import { ChangePasswordService } from "../services/change-password.service";
 import { SecureGuard } from "../guards/secure.guard";
@@ -22,5 +22,13 @@ export class SecureController {
     @Post("new-account")
     async createNewAccount(@Body() data: CreateAccountForm): Promise<void> {
         return this.createAccountService.execute(data);
+    }
+
+    @Get("test-num-env")
+    async testNumEnv(): Promise<any> {
+        const num = process.env.AVAILABLE_DELEGATES_AMOUNT;
+        return {
+            num: parseInt(num, 10) + 1,
+        };
     }
 }

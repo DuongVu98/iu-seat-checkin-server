@@ -7,6 +7,7 @@ export class GetNumerialInfoService {
     constructor(private seatRepository: SeatRepository) {}
 
     async execute(): Promise<NumerialInfoDto> {
+        const availableDelegatesAmout = parseInt(process.env.AVAILABLE_DELEGATES_AMOUNT, 10);
         let delegatesAmount;
         let occupiedAmount;
         let guestsAmount;
@@ -25,7 +26,7 @@ export class GetNumerialInfoService {
             occupiedGuestsAmount = res;
         });
         return new NumerialInfoDto()
-            .thisSetDelegatesAmount(delegatesAmount - guestsAmount)
+            .thisSetDelegatesAmount(availableDelegatesAmout + delegatesAmount - guestsAmount)
             .thisSetOccupiedAmount(occupiedAmount - occupiedGuestsAmount);
     }
 }
