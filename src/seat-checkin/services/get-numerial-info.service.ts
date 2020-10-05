@@ -10,6 +10,7 @@ export class GetNumerialInfoService {
         let delegatesAmount;
         let occupiedAmount;
         let guestsAmount;
+        let occupiedGuestsAmount;
 
         await this.seatRepository.coutAll().then(res => {
             delegatesAmount = res;
@@ -19,9 +20,12 @@ export class GetNumerialInfoService {
         });
         await this.seatRepository.countAllGuests().then(res => {
             guestsAmount = res;
-        })
+        });
+        await this.seatRepository.countAllOccupiedGuests().then(res => {
+            occupiedGuestsAmount = res;
+        });
         return new NumerialInfoDto()
-                .thisSetDelegatesAmount(delegatesAmount - guestsAmount)
-                .thisSetOccupiedAmount(occupiedAmount);
+            .thisSetDelegatesAmount(delegatesAmount - guestsAmount)
+            .thisSetOccupiedAmount(occupiedAmount - occupiedGuestsAmount);
     }
 }

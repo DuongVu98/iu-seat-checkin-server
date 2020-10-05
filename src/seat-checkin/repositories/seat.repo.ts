@@ -43,4 +43,10 @@ export class SeatRepository {
             delegateCode: "KM",
         });
     }
+    async countAllOccupiedGuests(): Promise<number> {
+        return this.seatModel.countDocuments({
+            delegateCode: "KM",
+            occupied: true,
+        });
+    }
 }
