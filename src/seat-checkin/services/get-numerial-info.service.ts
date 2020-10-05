@@ -9,6 +9,7 @@ export class GetNumerialInfoService {
     async execute(): Promise<NumerialInfoDto> {
         let delegatesAmount;
         let occupiedAmount;
+        let guestsAmount;
 
         await this.seatRepository.coutAll().then(res => {
             delegatesAmount = res;
@@ -16,9 +17,11 @@ export class GetNumerialInfoService {
         await this.seatRepository.countAllOccupiedSeat().then(res => {
             occupiedAmount = res;
         });
-
+        await this.seatRepository.countAllGuests().then(res => {
+            guestsAmount = res;
+        })
         return new NumerialInfoDto()
-                .thisSetDelegatesAmount(delegatesAmount)
+                .thisSetDelegatesAmount(delegatesAmount - guestsAmount)
                 .thisSetOccupiedAmount(occupiedAmount);
     }
 }
